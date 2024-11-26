@@ -1,0 +1,164 @@
+-- Configuration Section
+getgenv().config = {
+    ["Team"] = "Pirates",
+    ["Use Race"] = {
+        ["V3"] = true,
+        ["V4"] = true
+    },
+    ["Info Screen"] = true,
+    ["White Screen"] = false,
+    ["BypassTp"] = true,
+    ["SkipFruit"] = {
+        "Portal-Portal"
+    },
+    ["Skip Race V4 User"] = true,
+    ["MainSkillToggle"] = {
+        ["Melee"] = {
+            ["Enable"] = true,
+            ["Delay"] = 1.75,
+            ["Skills"] = {
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 1.5,
+                },
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+                ["C"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+            },
+        },
+        ["Blox Fruit"] = {
+            ["Enable"] = false,
+            ["Delay"] = 2,
+            ["Skills"] = {
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 2,
+                },
+                ["C"] = {
+                    ["Enable"] = false,
+                    ["HoldTime"] = 0,
+                },
+                ["V"] = {
+                    ["Enable"] = false,
+                    ["HoldTime"] = 0,
+                },
+                ["F"] = {
+                    ["Enable"] = false,
+                    ["HoldTime"] = 0,
+                },
+            },
+        },
+        ["Gun"] = {
+            ["Enable"] = true,
+            ["Delay"] = 1,
+            ["Skills"] = {
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+            },
+        },
+        ["Sword"] = {
+            ["Enable"] = true,
+            ["Delay"] = 1,
+            ["Skills"] = {
+                ["Z"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+                ["X"] = {
+                    ["Enable"] = true,
+                    ["HoldTime"] = 0,
+                },
+            },
+        }
+    },
+    ["Webhooks"] = {
+        ["Link Webhook"] = "",
+        ["Toggle Webhook"] = true
+    },
+    ["MinBountyHunt"] = 0,
+    ["MaxBountyHunt"] = 30000000,
+    ["SafeHealth"] = 4000
+}
+
+-- UI Section
+local bountyEarned = 0
+local currentBounty = 1500000
+
+-- Create UI
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local BountyEarnedLabel = Instance.new("TextLabel")
+local CurrentBountyLabel = Instance.new("TextLabel")
+
+-- Parent the GUI to the player's screen
+ScreenGui.Parent = game.CoreGui
+
+-- Frame settings
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+Frame.Size = UDim2.new(0, 300, 0, 200)
+Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+Frame.BorderSizePixel = 0
+
+-- Title settings
+Title.Parent = Frame
+Title.Text = "KXNGDEKUNGZ"
+Title.Font = Enum.Font.SourceSansBold
+Title.TextSize = 24
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.BackgroundTransparency = 1
+Title.Position = UDim2.new(0.5, 0, 0.1, 0)
+Title.AnchorPoint = Vector2.new(0.5, 0.5)
+
+-- Bounty Earned Label settings
+BountyEarnedLabel.Parent = Frame
+BountyEarnedLabel.Text = "Total Bounty Earned: 0"
+BountyEarnedLabel.Font = Enum.Font.SourceSans
+BountyEarnedLabel.TextSize = 18
+BountyEarnedLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+BountyEarnedLabel.BackgroundTransparency = 1
+BountyEarnedLabel.Position = UDim2.new(0.5, 0, 0.4, 0)
+BountyEarnedLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+
+-- Current Bounty Label settings
+CurrentBountyLabel.Parent = Frame
+CurrentBountyLabel.Text = "Current Bounty: 0"
+CurrentBountyLabel.Font = Enum.Font.SourceSans
+CurrentBountyLabel.TextSize = 18
+CurrentBountyLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+CurrentBountyLabel.BackgroundTransparency = 1
+CurrentBountyLabel.Position = UDim2.new(0.5, 0, 0.6, 0)
+CurrentBountyLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+
+-- Function to simulate bounty updates
+function updateBounty()
+    while true do
+        wait(2) -- Update every 2 seconds
+        bountyEarned = bountyEarned + math.random(1000, 10000) -- Simulate earning bounty
+        currentBounty = currentBounty + math.random(500, 5000) -- Simulate current bounty growth
+
+        -- Update UI
+        BountyEarnedLabel.Text = "Total Bounty Earned: " .. bountyEarned
+        CurrentBountyLabel.Text = "Current Bounty: " .. currentBounty
+    end
+end
+
+-- Start the bounty update simulation
+spawn(updateBounty)
